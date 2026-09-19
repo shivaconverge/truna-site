@@ -54,7 +54,7 @@ h3{font-size:clamp(20px,2.6vw,25px);line-height:1.25}
 .body{max-width:var(--measure);color:var(--muted)}
 .body p{margin-bottom:1em}
 section{padding:clamp(48px,8vh,92px) 0}
-body>section:nth-of-type(even){
+body>section:nth-of-type(odd){
   background:linear-gradient(180deg,var(--ground) 0%,#121A25 22%,#111722 72%,var(--ground) 100%)}
 .rule{border:0;border-top:1px solid var(--line)}
 .mono-cap{font-family:var(--mono);font-size:12px;letter-spacing:.06em;
