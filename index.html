@@ -542,7 +542,7 @@
   function layout(){
     var rect=cv.parentElement.getBoundingClientRect();
     var dpr=Math.min(devicePixelRatio||1,2);
-    W=Math.max(rect.width,320);HB=Math.max(340,Math.min(540,W*0.48));H=HB+PT;
+    W=Math.max(rect.width,320);HB=Math.max(270,Math.min(540,W*0.56));H=HB+PT;
     cv.width=W*dpr;cv.height=H*dpr;cv.style.height=H+'px';
     ctx.setTransform(dpr,0,0,dpr,0,0);
   }
