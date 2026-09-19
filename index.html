@@ -542,7 +542,7 @@
   function layout(){
     var rect=cv.parentElement.getBoundingClientRect();
     var dpr=Math.min(devicePixelRatio||1,2);
-    W=Math.max(rect.width,320);H=Math.max(300,Math.min(460,W*0.44));
+    W=Math.max(rect.width,320);H=Math.max(340,Math.min(560,W*0.5));
     cv.width=W*dpr;cv.height=H*dpr;cv.style.height=H+'px';
     ctx.setTransform(dpr,0,0,dpr,0,0);
   }
@@ -556,7 +556,7 @@
   function P(u,v,z){
     var x=(u-0.5),y=(v-0.5);
     var sx=W*0.5+(x*0.92-y*0.34)*W*0.52;
-    var sy=H*0.62+(x*0.22+y*0.78)*H*0.42-z*H*0.30;
+    var sy=H*0.66+(x*0.22+y*0.78)*H*0.38-z*H*0.26;
     return [sx,sy];
   }
   // the tree, grown once in uv space; lifted onto the surface every frame
@@ -676,11 +676,12 @@
     if(pk>0.5){
       var tip=surf(PX,PY,e,g,pk),pt=P(PX,PY,tip.z);
       var glow=0.25+0.12*Math.sin(e*1.4);
-      var grad=ctx.createRadialGradient(pt[0],pt[1],0,pt[0],pt[1],46);
+      var grad=ctx.createRadialGradient(pt[0],pt[1],0,pt[0],pt[1],78);
       grad.addColorStop(0,'rgba(224,138,60,'+glow*(pk-0.5)*2+')');
+      grad.addColorStop(0.45,'rgba(224,138,60,'+glow*(pk-0.5)*0.8+')');
       grad.addColorStop(1,'rgba(224,138,60,0)');
       ctx.fillStyle=grad;
-      ctx.beginPath();ctx.arc(pt[0],pt[1],46,0,6.2832);ctx.fill();
+      ctx.beginPath();ctx.arc(pt[0],pt[1],78,0,6.2832);ctx.fill();
     }
   }
   function frame(ts){
