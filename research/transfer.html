@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<title>Into the weights — Truna Research</title>
+<meta name="description" content="A 2B model taught one planning step from generated plans reaches 94% of its 27B teacher — and sampled eight times, its best answer equals the teacher outright.">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="/">
+      <svg width="26" height="26" viewBox="0 0 30 30"><circle cx="15" cy="15" r="12.5" fill="none" stroke="currentColor" opacity=".55" stroke-width="1.3" stroke-dasharray="3 3.5"/><circle cx="18.5" cy="17.5" r="5" fill="#E08A3C"/></svg>
+      <span>Truna</span>
+    </a>
+    <div class="nav-links">
+      <a class="hide-xs" href="/#method">Method</a>
+      <a href="./" aria-current="page">Research</a>
+      <a href="/#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="article">
+  <a class="backlink" href="./">← Research</a>
+  <h1>Into the weights</h1>
+  <p class="lede">Context lends expertise; training keeps it. The first transfer
+  experiment asks the smallest version of the question that matters: can one
+  planning skill, learned from our generated plans, move into a small model's
+  weights — <b>measurably</b>?</p>
+  <div class="meta">
+    <span class="tag measured">measured</span>
+    <span class="tag">micro-scale</span>
+    <span class="tag">blind-judged</span>
+  </div>
+</header>
+
+<div class="prose">
+  <h2>Setup</h2>
+  <p>A 2.1B open model was fine-tuned on <b>115,580 sub-task-discovery problems
+  drawn from 259 system-produced plans</b> — about one GPU-day of supervised
+  training. The reference is its 27B teacher. Held-out evaluations were
+  blind-scored by an independent frontier model from a different provider, on
+  tasks from plans the student never trained on.</p>
+
+  <h2>Result</h2>
+  <p>On fine-grained planning work the tuned 2B reached <b>94% of its 27B
+  teacher — 18 of 18 cases, blind-judged</b>. The untuned base model falls far
+  behind on the same tasks: the skill demonstrably came from the generated
+  plans.</p>
+  <p>The more surprising measurement is what the tuned model already holds.
+  Sampled eight times per task with the best answer kept, it <b>equals the
+  teacher outright</b> — and roughly a quarter of its single attempts match or
+  beat the teacher's answer for the same task. The remaining gap is not a ceiling
+  on capability; it is a matter of consistency — which is precisely the kind of
+  gap that further preference training works on, using only the model's own
+  attempts, ranked.</p>
+
+  <figure class="fig">
+    <img src="../assets/plate-transfer.jpg" alt="A large ring condensing into a compact one" loading="lazy">
+    <figcaption>The shape of the result: capability condensing from a large model
+    into a compact one — without losing the shape of the skill.</figcaption>
+  </figure>
+
+  <h2>Why it matters</h2>
+  <p>Specialists only make economic sense if capability can be moved into small,
+  cheap models. A 13× size gap closed to 94% on a narrow skill, using only
+  generated data, is the first direct evidence that our corpus transfers into
+  weights at all — the necessary first step before the full-scale claim, which
+  remains to be proven.</p>
+
+  <div class="claims">
+    <div class="yes">
+      <h3>This establishes</h3>
+      <ul>
+        <li>A first transfer into weights: one planning skill, learned from
+        generated plans alone, blind-judged at 94% of a 13×-larger teacher.</li>
+        <li>The capability ceiling of the tuned 2B is at the teacher's level —
+        best-of-eight equals it; the residual gap is consistency.</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h3>It does not establish</h3>
+      <ul>
+        <li>Breadth — one skill, one domain, micro-scale; not a claim about
+        running a business function.</li>
+        <li>That consistency-closing reinforcement is settled — early runs are
+        promising and reproduce, but the effect has not yet cleared statistical
+        significance; more evaluation tasks are in progress.</li>
+        <li>Full-scale training economics — that is the central experiment
+        ahead.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="mono-cap">companion technical note — methods, limitations, judge
+  protocol — available on request ·
+  <a href="mailto:hello@truna.ai" style="color:var(--accent)">hello@truna.ai</a></p>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <a class="backlink" href="./">← All research</a>
+      <a class="mail" href="mailto:hello@truna.ai" style="margin-left:auto">hello@truna.ai</a>
+    </div>
+    <p class="foot-note">&copy; 2026 Truna · truna.ai</p>
+  </div>
+</footer>
+
+</body>
+</html>

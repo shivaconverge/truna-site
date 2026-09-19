@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<title>Filling the decision space — Truna Research</title>
+<meta name="description" content="Pilot measurement: space-first generation from a small open model covers a mapped concept space that a single unbounded frontier run barely enters.">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="/">
+      <svg width="26" height="26" viewBox="0 0 30 30"><circle cx="15" cy="15" r="12.5" fill="none" stroke="currentColor" opacity=".55" stroke-width="1.3" stroke-dasharray="3 3.5"/><circle cx="18.5" cy="17.5" r="5" fill="#E08A3C"/></svg>
+      <span>Truna</span>
+    </a>
+    <div class="nav-links">
+      <a class="hide-xs" href="/#method">Method</a>
+      <a href="./" aria-current="page">Research</a>
+      <a href="/#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="article">
+  <a class="backlink" href="./">← Research</a>
+  <h1>Filling the decision space</h1>
+  <p class="lede">Ordinary generation circles what it already knows. The question
+  this pilot asks is whether a machine that maps the space as it generates can
+  reach the regions a strong agentic run never enters.</p>
+  <div class="meta">
+    <span class="tag measured">measured</span>
+    <span class="tag">pilot scale</span>
+    <span class="tag">august 2026</span>
+  </div>
+</header>
+
+<div class="prose">
+  <h2>Setup</h2>
+  <p>Four domains, each seeded with a single question. Our machine generated
+  <b>20 decision sequences per domain from a small open model</b> (Qwen-class 27B,
+  4-bit). The baseline: <b>a single unbounded multi-agent frontier run with
+  tools</b> — a frontier model in a multi-turn agentic harness, free to browse,
+  recurse and spawn sub-agents (169 samples). Both outputs were mapped against a
+  tracked concept space per domain, and coverage was measured, not eyeballed.</p>
+
+  <h2>Result</h2>
+  <p>The generated sequences reached <b>every tracked concept</b> in all four
+  domains. The frontier run reached <b>at most 22%</b> of the same space —
+  staying, domain after domain, near where it started. At pilot cut-off our
+  coverage curve was still climbing: the probe set was full; the space was not.</p>
+
+  <figure class="fig">
+    <video src="../assets/coverage-all.mp4" autoplay muted loop playsinline></video>
+    <figcaption>Four domains, back to back. Each map is a 2-D projection of one
+    domain's concept space. Blue: generated sequences spreading to cover it.
+    Red: the single frontier run — staying where it started.</figcaption>
+  </figure>
+
+  <h2>Why it matters</h2>
+  <p>Coverage is the property everything else depends on. A specialist trained on
+  data that circles its seed inherits the seed's blind spots; a specialist trained
+  on data with measured coverage of the mapped space can hold experience for
+  regions where nothing has happened yet. This pilot is the first direct
+  measurement that our generation reaches those regions and a strong agentic
+  baseline does not.</p>
+
+  <div class="claims">
+    <div class="yes">
+      <h3>This establishes</h3>
+      <ul>
+        <li>At pilot scale, space-first generation from a small open model covers a
+        tracked concept space that a single unbounded multi-agent frontier run
+        does not.</li>
+        <li>The coverage measurement itself — coverage here is a number, computed
+        against a mapped space, not an impression.</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h3>It does not establish</h3>
+      <ul>
+        <li>Saturation — the pilot stopped at cut-off with the curve still
+        climbing.</li>
+        <li>Scale — four domains, one seed each, one baseline configuration.</li>
+        <li>Probe-set independence — the tracked concepts were authored by us; an
+        independently authored probe set is a named next step.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="mono-cap">full coverage maps, probe sets and run logs available on
+  request · <a href="mailto:hello@truna.ai" style="color:var(--accent)">hello@truna.ai</a></p>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <a class="backlink" href="./">← All research</a>
+      <a class="mail" href="mailto:hello@truna.ai" style="margin-left:auto">hello@truna.ai</a>
+    </div>
+    <p class="foot-note">&copy; 2026 Truna · truna.ai</p>
+  </div>
+</footer>
+
+</body>
+</html>

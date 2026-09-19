@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<title>What the model did not know — Truna Research</title>
+<meta name="description" content="A blind discovery run against a frontier-built causal model of a capital decision surfaces five missing mechanisms — and the modeled economics reverse.">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="/">
+      <svg width="26" height="26" viewBox="0 0 30 30"><circle cx="15" cy="15" r="12.5" fill="none" stroke="currentColor" opacity=".55" stroke-width="1.3" stroke-dasharray="3 3.5"/><circle cx="18.5" cy="17.5" r="5" fill="#E08A3C"/></svg>
+      <span>Truna</span>
+    </a>
+    <div class="nav-links">
+      <a class="hide-xs" href="/#method">Method</a>
+      <a href="./" aria-current="page">Research</a>
+      <a href="/#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="article">
+  <a class="backlink" href="./">← Research</a>
+  <h1>What the model did not know</h1>
+  <p class="lede">Monte Carlo answers the uncertainty you specify. It cannot, by
+  itself, discover a mechanism that was never represented. This study isolates
+  that second problem — <b>model-space uncertainty</b> — and tests whether blind
+  discovery can close it.</p>
+  <div class="meta">
+    <span class="tag illustrative">illustrative scenario</span>
+    <span class="tag">blind protocol</span>
+    <span class="tag">simulation-gated</span>
+  </div>
+</header>
+
+<div class="prose">
+  <h2>Setup</h2>
+  <p>An unrestricted agentic frontier run — browsing, tools, sub-agents, no preset
+  budget — was given a staged, multi-billion-dollar EV manufacturing programme
+  (illustrative: every numeric input assumed, no company data used) and built the
+  baseline causal simulation itself: <b>36 variables, 20,000 futures over 40
+  quarters</b>.</p>
+  <p>Our discovery system then ran <b>blind</b>: it received the decision problem,
+  but not the baseline's variables, causal graph, or omissions. Its findings
+  became candidate variables only if re-simulation showed they materially changed
+  the decision — impact gated by arithmetic, not by one model rating another's
+  prose.</p>
+
+  <h2>Result</h2>
+  <p>The blind search produced 22 findings; seven became candidates; <b>five
+  survived the simulation gate</b> — none of them exotic: a total-cost-of-ownership
+  demand cliff, step-function grid reinforcement costs, a charging-anxiety premium,
+  grid interconnection delay, and a resale-liquidity penalty. Persistent regimes
+  and structural frictions — the kind that change the central case, not just the
+  tail.</p>
+  <p>Incorporated into the same simulation machinery, they <b>reversed the modeled
+  economics of the decision</b>: the median outcome flipped sign, and the value of
+  preserving the option to halt rose several-fold. The result is not five more
+  risk bullets; it is a different model of the world.</p>
+
+  <figure class="fig">
+    <img src="../assets/plate-discovery.jpg" alt="Two constellations of a known model, and mechanisms beyond its boundary" loading="lazy">
+    <figcaption>The shape of the finding: a coherent model of the decision — and
+    consequential mechanisms sitting beyond its boundary, unreachable from inside
+    it.</figcaption>
+  </figure>
+
+  <h2>Why it matters</h2>
+  <p>Frontier models are strong at reasoning <em>inside</em> a supplied
+  representation. The harder question is whether they reliably construct the right
+  representation. A polished answer can be confidently wrong when the relevant
+  mechanism never entered the model — and the practical conclusion changes from
+  "forecast better" to "structure the commitment so you can change your mind."</p>
+
+  <div class="claims">
+    <div class="yes">
+      <h3>This establishes</h3>
+      <ul>
+        <li>A blind discovery process surfaced mechanisms absent from a
+        frontier-model-built baseline.</li>
+        <li>Those mechanisms translate into executable causal structure and
+        materially change the decision distribution.</li>
+        <li>Discoveries were gated by simulated impact, not by model-graded
+        prose.</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h3>It does not establish</h3>
+      <ul>
+        <li>That the discovered magnitudes are measured correctly in the real
+        world — the scenario is intentionally illustrative.</li>
+        <li>That the post-discovery model is complete or globally optimal.</li>
+        <li>That the effect generalises across domains — the next protocol runs
+        the same blind test across many unrelated decisions, against repeated
+        frontier runs and cost-matched baselines.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="mono-cap">full study — mechanisms, distributions, audit trail —
+  available on request ·
+  <a href="mailto:hello@truna.ai" style="color:var(--accent)">hello@truna.ai</a></p>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <a class="backlink" href="./">← All research</a>
+      <a class="mail" href="mailto:hello@truna.ai" style="margin-left:auto">hello@truna.ai</a>
+    </div>
+    <p class="foot-note">&copy; 2026 Truna · truna.ai</p>
+  </div>
+</footer>
+
+</body>
+</html>

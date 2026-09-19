@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<title>Research — Truna</title>
+<meta name="description" content="Truna research: coverage, blind discovery, decision context and transfer into weights — each study stated with what it establishes and what it does not.">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="/">
+      <svg width="26" height="26" viewBox="0 0 30 30"><circle cx="15" cy="15" r="12.5" fill="none" stroke="currentColor" opacity=".55" stroke-width="1.3" stroke-dasharray="3 3.5"/><circle cx="18.5" cy="17.5" r="5" fill="#E08A3C"/></svg>
+      <span>Truna</span>
+    </a>
+    <div class="nav-links">
+      <a class="hide-xs" href="/#method">Method</a>
+      <a href="./" aria-current="page">Research</a>
+      <a class="hide-s" href="/#team">Team</a>
+      <a href="/#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="article" style="padding-bottom:16px">
+  <p class="eyebrow">Research</p>
+  <h1>What we've measured,<br>and what we haven't yet.</h1>
+  <p class="lede">Our claims are only as good as the studies behind them, so every
+  study here carries its own limits section. Three registers, marked on every
+  page: <b>measured</b> — a number from a run you could re-execute;
+  <b>illustrative</b> — a mechanism demonstrated inside an assumed scenario;
+  and the open questions we have not answered yet.</p>
+  <div class="meta">
+    <span class="tag measured">measured</span>
+    <span class="tag illustrative">illustrative</span>
+    <span class="tag aim">open question</span>
+    <span class="mono-cap" style="margin-left:auto">full methods &amp; data · <a href="mailto:hello@truna.ai" style="color:var(--accent)">on request</a></span>
+  </div>
+</header>
+
+<section style="padding-top:34px">
+  <div class="wrap">
+    <div class="cards">
+      <a class="card" href="coverage.html">
+        <div class="art"><img src="../assets/plate-coverage.jpg" alt="" loading="lazy"></div>
+        <div class="pad">
+          <span class="tag measured">measured · pilot · aug 2026</span>
+          <h3>Filling the decision space</h3>
+          <p>Four domains. Twenty generated sequences from a small open model reach
+          every tracked concept; a single unbounded multi-agent frontier run with
+          tools reaches at most 22% of the same space.</p>
+          <span class="foot">Read the study →</span>
+        </div>
+      </a>
+      <a class="card" href="blind-discovery.html">
+        <div class="art"><img src="../assets/plate-discovery.jpg" alt="" loading="lazy"></div>
+        <div class="pad">
+          <span class="tag illustrative">illustrative · blind protocol</span>
+          <h3>What the model did not know</h3>
+          <p>A frontier agent builds a full causal simulation of a capital decision.
+          A blind discovery run then surfaces five mechanisms absent from it — and
+          the modeled economics reverse.</p>
+          <span class="foot">Read the study →</span>
+        </div>
+      </a>
+      <a class="card" href="decision-context.html">
+        <div class="art"><img src="../assets/plate-worlds.jpg" alt="" loading="lazy"></div>
+        <div class="pad">
+          <span class="tag measured">measured · one decision · blind-scored</span>
+          <h3>Expertise, lent by data</h3>
+          <p>One real decision, three runs of the same frontier model. With ~1,000
+          generated sequences in context it finds 92 exclusive high-impact
+          considerations — versus 42 alone, 33 with a research memo.</p>
+          <span class="foot">Read the study →</span>
+        </div>
+      </a>
+      <a class="card" href="transfer.html">
+        <div class="art"><img src="../assets/plate-transfer.jpg" alt="" loading="lazy"></div>
+        <div class="pad">
+          <span class="tag measured">measured · micro-scale · blind-judged</span>
+          <h3>Into the weights</h3>
+          <p>A 2B model taught one planning step from generated plans reaches 94% of
+          its 27B teacher — and sampled eight times, its best answer equals the
+          teacher outright.</p>
+          <span class="foot">Read the study →</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="claims" style="margin-top:56px">
+      <div class="yes">
+        <h3>Across the studies, established</h3>
+        <ul>
+          <li>Space-first generation covers concept regions that unbounded frontier
+          runs do not enter, at pilot scale.</li>
+          <li>Generated experience in context materially changes what a frontier
+          model considers on a real decision.</li>
+          <li>Blind discovery can surface consequential structure missing from a
+          frontier-built model of a decision.</li>
+          <li>A first micro-scale transfer of a planning skill into a small model's
+          weights, blind-judged against its teacher.</li>
+        </ul>
+      </div>
+      <div class="no">
+        <h3>Not yet established</h3>
+        <ul>
+          <li>That these effects hold at full training scale — the central
+          experiment ahead.</li>
+          <li>That they generalise across many unrelated decisions; the current
+          case-study evidence is deliberately small.</li>
+          <li>That discovered magnitudes are correct in the real world — they are
+          estimates that a mechanism matters, not measurements of its size.</li>
+          <li>That a specialist beats strong baselines on frozen historical
+          decisions under blind, independent judging — the evaluation we are
+          building toward.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <h2 style="font-size:clamp(24px,3.4vw,34px)">Want the full studies?</h2>
+      <a class="mail" href="mailto:hello@truna.ai">hello@truna.ai</a>
+    </div>
+    <p class="foot-note">&copy; 2026 Truna · truna.ai</p>
+  </div>
+</footer>
+
+</body>
+</html>

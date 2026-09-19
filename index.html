@@ -4,55 +4,372 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<title>Truna</title>
-<meta name="description" content="Truna trains role-specific expert models built to run a business function end to end.">
+<title>Truna — The experts are in training</title>
+<meta name="description" content="Truna builds specialist models for business decisions — trained on manufactured experience with measured coverage, grounded in each company's reality.">
+<meta property="og:title" content="Truna">
+<meta property="og:description" content="Specialist models for business decisions · truna.ai">
+<link rel="stylesheet" href="assets/site.css">
 <style>
-:root{
-  --ground:#10151B; --panel:#161C24; --ink:#ECEAE3; --muted:#98A0A8; --faint:#5E6871;
-  --line:#242C35; --accent:#E08A3C;
-  --serif:"Iowan Old Style","Palatino Nova",Palatino,"Book Antiqua",Georgia,serif;
-  --sans:"Avenir Next",Avenir,"Segoe UI",system-ui,-apple-system,sans-serif;
-  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
-}
-@media (prefers-color-scheme: light){
-  :root{
-    --ground:#F2EFE8; --panel:#FFFFFF; --ink:#1C222A; --muted:#5A636D; --faint:#8B939C;
-    --line:#DCD7CC; --accent:#C26A1B;
-  }
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{background:var(--ground);color:var(--ink);font-family:var(--sans);
-  display:flex;align-items:center;justify-content:center;padding:24px;
-  -webkit-font-smoothing:antialiased}
-main{max-width:38em;width:100%}
-.brand{font-family:var(--mono);font-size:13px;letter-spacing:.34em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:34px}
-h1{font-family:var(--serif);font-weight:500;letter-spacing:-.01em;line-height:1.08;
-  font-size:clamp(34px,7vw,58px);text-wrap:balance}
-.lede{margin-top:24px;font-size:clamp(16px,2.2vw,20px);line-height:1.6;color:var(--muted);max-width:32em}
-.lede b{color:var(--ink);font-weight:600}
-.row{margin-top:44px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:baseline;
-  font-family:var(--mono);font-size:13px;letter-spacing:.04em}
-.row a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--line);
-  padding-bottom:2px}
-.row a:hover,.row a:focus-visible{border-color:var(--accent);outline:none}
-.row span{color:var(--faint)}
-footer{margin-top:64px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--faint)}
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero-in{max-width:1200px;margin:0 auto;padding:clamp(84px,15vh,170px) var(--gutter) clamp(72px,12vh,140px);
+  position:relative;z-index:2}
+.hero h1{font-size:clamp(42px,7.4vw,86px);line-height:1.03;max-width:11em}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero .lede{margin-top:28px}
+.hero-cta{margin-top:44px;display:flex;flex-wrap:wrap;gap:14px}
+.btn{display:inline-block;font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;
+  text-transform:uppercase;text-decoration:none;padding:13px 22px;border-radius:10px;
+  border:1px solid var(--line2);color:var(--ink);transition:all .2s ease}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#14100A}
+.btn.primary:hover{background:#EA9A50}
+.btn:hover{border-color:var(--accent)}
+#cover{position:absolute;inset:0;z-index:1;opacity:.5}
+.hero-cap{position:relative;z-index:2;margin-top:clamp(48px,9vh,90px);
+  display:flex;flex-wrap:wrap;gap:8px 26px;font-family:var(--mono);font-size:11.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.hero-cap i{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:8px;
+  vertical-align:-1px}
+.quote{font-family:var(--serif);font-size:clamp(22px,3.4vw,34px);line-height:1.35;
+  letter-spacing:-.01em;max-width:26em;text-wrap:balance}
+.quote em{font-style:italic;color:var(--accent)}
+.split{display:grid;gap:clamp(28px,5vw,72px)}
+@media(min-width:900px){.split{grid-template-columns:5fr 7fr}}
 </style>
 </head>
 <body>
-<main>
-  <p class="brand" style="display:flex;align-items:center"><svg width="30" height="30" viewBox="0 0 30 30" style="margin-right:12px;flex:none"><circle cx="15" cy="15" r="12.5" fill="none" stroke="currentColor" opacity=".55" stroke-width="1.3" stroke-dasharray="3 3.5"/><circle cx="18.5" cy="17.5" r="5" fill="var(--accent)"/></svg><span>Truna</span></p>
-  <h1>General models know everything.<br>They're experts at nothing.</h1>
-  <p class="lede"><b>We train the experts</b> — role-specific models built to run a
-  business function end to end, on synthetic data with measured coverage.</p>
-  <div class="row">
-    <a href="mailto:hello@truna.ai">hello@truna.ai</a>
-    <span>deck &amp; demo on request</span>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="/">
+      <svg width="26" height="26" viewBox="0 0 30 30"><circle cx="15" cy="15" r="12.5" fill="none" stroke="currentColor" opacity=".55" stroke-width="1.3" stroke-dasharray="3 3.5"/><circle cx="18.5" cy="17.5" r="5" fill="#E08A3C"/></svg>
+      <span>Truna</span>
+    </a>
+    <div class="nav-links">
+      <a class="hide-xs" href="#method">Method</a>
+      <a href="research/">Research</a>
+      <a class="hide-s" href="#team">Team</a>
+      <a href="#contact">Contact</a>
+    </div>
   </div>
-  <footer>&copy; 2026 Truna &middot; truna.ai</footer>
-</main>
+</nav>
+
+<header class="hero">
+  <canvas id="cover" aria-hidden="true"></canvas>
+  <div class="hero-in">
+    <h1>The experts are <em>in training.</em></h1>
+    <p class="lede">Truna builds <b>specialist models for business decisions</b> —
+    trained on manufactured experience that covers a decision space the world never
+    wrote down, and grounded, company by company, in the one reality each business
+    actually inhabits.</p>
+    <div class="hero-cta">
+      <a class="btn primary" href="research/">Read the research</a>
+      <a class="btn" href="#method">How it works</a>
+    </div>
+    <div class="hero-cap">
+      <span><i style="background:var(--teal)"></i>generated experience, spreading to cover the space</span>
+      <span><i style="background:var(--accent)"></i>what recorded history covers</span>
+    </div>
+  </div>
+</header>
+
+<section id="why">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow"><span class="n">01</span>The bottleneck</p>
+      <h2>The world is running out of accumulated experience.</h2>
+    </div>
+    <div class="body" style="align-self:end">
+      <p>Every consequential decision draws on a stock of experience — situations
+      seen, causes tested, mistakes survived. That stock accumulates one career at a
+      time, while the decisions drawing on it multiply and mutate faster every year.</p>
+      <p>And the record keeps the wrong thing. Business history logs <b>outcomes</b> —
+      the deal closed, the plant opened, the quarter missed. It almost never logs the
+      <b>reasoning</b>: the considerations weighed, the assumptions carried, the
+      alternatives declined. The one thing a decision-maker most needs from the past
+      is precisely what the past does not record.</p>
+      <p><b>Frontier models inherit the same gap.</b> They can search, reason, use
+      tools and run agents — and still miss consequential parts of a decision space,
+      because that experience was never written anywhere they could learn it.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="method">
+  <div class="wrap">
+    <p class="eyebrow"><span class="n">02</span>The method</p>
+    <h2 style="max-width:16em">Manufacture the experience.<br>Measure the coverage.<br>Ground it in the company.</h2>
+    <p class="lede" style="margin-top:26px">We do not generate synthetic text. We
+    generate <b>synthetic experience</b> — worlds, mechanisms, decisions, failures
+    and consequences that a specialist can learn from. The machine discovers the
+    decision space as it generates, and stops only when measured coverage saturates.</p>
+
+    <div class="steps" style="margin-top:56px">
+      <div class="step">
+        <span class="n">I</span>
+        <h3>Map the space</h3>
+        <p>Business decisions don't come with a map. The machine partitions the
+        decision space as it explores it — including the regions where nothing has
+        happened yet.</p>
+      </div>
+      <div class="step">
+        <span class="n">II</span>
+        <h3>Generate experience</h3>
+        <p>From minimal seeds, it expands deep decision sequences — context,
+        trade-offs, consequences — across the whole mapped space, not just around
+        the starting sample.</p>
+      </div>
+      <div class="step">
+        <span class="n">III</span>
+        <h3>Measure coverage</h3>
+        <p>Coverage of the mapped space is measured, continuously. Generation does
+        not halt on a schedule or a sample size; it halts when the measurement
+        saturates.</p>
+      </div>
+      <div class="step">
+        <span class="n">IV</span>
+        <h3>Ground the company</h3>
+        <p>Domain training teaches a specialist the space of worlds that could
+        exist. A company's own evidence then progressively locates it in the one
+        that does — and every outcome makes it more specific.</p>
+      </div>
+    </div>
+
+    <div class="formula">
+      <b>M</b><sub>base</sub> + D<sub class="a">domain</sub> → <b>M</b><sub>domain</sub>
+      &nbsp;&nbsp;·&nbsp;&nbsp;
+      <b>M</b><sub>domain</sub> + D<sub class="a">company</sub> → <b>M</b><sub>domain@company</sub>
+      &nbsp;&nbsp;·&nbsp;&nbsp;
+      trained across possible worlds, grounded in the real one
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="evidence">
+  <div class="wrap">
+    <p class="eyebrow"><span class="n">03</span>Measured so far</p>
+    <h2 style="max-width:15em">Early, small-scale — and pointing one way.</h2>
+    <p class="lede" style="margin-top:24px">These are pilot-scale measurements, each
+    reported with its limits. What full scale looks like is the work ahead —
+    not a claim we make today.</p>
+
+    <div class="stats" style="margin-top:52px">
+      <div class="stat">
+        <div class="v">every concept <em>vs ≤22%</em></div>
+        <div class="k">Twenty generated sequences from a small open model reached every
+        tracked concept in four domains; a single unbounded multi-agent frontier run
+        with tools reached at most 22% of the same space.</div>
+        <div class="q">measured · pilot scale · aug 2026</div>
+      </div>
+      <div class="stat">
+        <div class="v">92 <em>vs 42</em></div>
+        <div class="k">On one real investment decision, ~1,000 generated sequences in
+        context produced 92 exclusive high-impact considerations; an unrestricted
+        agentic frontier run alone produced 42 — including the study's single top
+        insight, reached only with our data.</div>
+        <div class="q">measured · one decision · blind-scored</div>
+      </div>
+      <div class="stat">
+        <div class="v">94% <em>of 27B</em></div>
+        <div class="k">A 2B model taught one planning step from our generated plans
+        reached 94% of its 27B teacher on fine-grained work, 18 of 18 cases —
+        and sampled eight times, its best answer equals the teacher outright.</div>
+        <div class="q">measured · micro-scale transfer · blind-judged</div>
+      </div>
+      <div class="stat">
+        <div class="v">5 <em>mechanisms</em></div>
+        <div class="k">Run blind against a frontier-built causal model of a capital
+        decision, discovery surfaced five missing mechanisms that reversed the
+        modeled economics of the decision.</div>
+        <div class="q">illustrative scenario · blind protocol</div>
+      </div>
+    </div>
+    <p class="mono-cap" style="margin-top:18px">every figure traces to a study; each
+    study states what it establishes and what it does not.</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="research-preview">
+  <div class="wrap">
+    <p class="eyebrow"><span class="n">04</span>Research</p>
+    <div class="split" style="align-items:end;margin-bottom:52px">
+      <h2>Studies, stated honestly.</h2>
+      <p class="body" style="margin:0">Each piece of work is tagged for what it is —
+      measured result, illustrative scenario, or open question — and reports the
+      strongest argument against itself alongside the finding.</p>
+    </div>
+    <div class="cards">
+      <a class="card" href="research/coverage.html">
+        <div class="art"><img src="assets/plate-coverage.jpg" alt="" loading="lazy"></div>
+        <div class="pad">
+          <span class="tag measured">measured · pilot</span>
+          <h3>Filling the decision space</h3>
+          <p>Generated sequences from a small open model cover a mapped concept
+          space that a single frontier run barely enters.</p>
+          <span class="foot">Read the study →</span>
+        </div>
+      </a>
+      <a class="card" href="research/blind-discovery.html">
+        <div class="art"><img src="assets/plate-discovery.jpg" alt="" loading="lazy"></div>
+        <div class="pad">
+          <span class="tag illustrative">illustrative · blind</span>
+          <h3>What the model did not know</h3>
+          <p>A blind discovery run against a frontier-built world model surfaces
+          five missing mechanisms — and the decision reverses.</p>
+          <span class="foot">Read the study →</span>
+        </div>
+      </a>
+      <a class="card" href="research/decision-context.html">
+        <div class="art"><img src="assets/plate-worlds.jpg" alt="" loading="lazy"></div>
+        <div class="pad">
+          <span class="tag measured">measured · n=1</span>
+          <h3>Expertise, lent by data</h3>
+          <p>The same frontier model, the same question — only what it holds in
+          context changes. Generated experience more than doubles its high-impact
+          findings.</p>
+          <span class="foot">Read the study →</span>
+        </div>
+      </a>
+      <a class="card" href="research/transfer.html">
+        <div class="art"><img src="assets/plate-transfer.jpg" alt="" loading="lazy"></div>
+        <div class="pad">
+          <span class="tag measured">measured · micro-scale</span>
+          <h3>Into the weights</h3>
+          <p>A 2B model learns one planning skill from generated plans and closes
+          most of the distance to a model thirteen times its size.</p>
+          <span class="foot">Read the study →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="destination">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow"><span class="n">05</span>Where this goes</p>
+      <h2>Models built to compound.</h2>
+    </div>
+    <div>
+      <p class="quote">A specialist that runs a business function. Specialists,
+      composed, that run the business — <em>each one grounded in your company,</em>
+      each outcome making it more specific to you.</p>
+      <p class="body" style="margin-top:26px">That is the destination, not the
+      present state — and we intend to earn it in public: studies first, then
+      specialists evaluated blind against strong baselines on frozen historical
+      decisions, by independent judges.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="team">
+  <div class="wrap">
+    <p class="eyebrow"><span class="n">06</span>Team</p>
+    <h2>Three founders. Twenty years.</h2>
+    <p class="lede" style="margin-top:20px">Together since IIT Delhi, 2006.</p>
+    <div class="team" style="margin-top:48px">
+      <div class="member">
+        <h3>Gagan Gupta</h3>
+        <p class="role">Trains the models</p>
+        <p>Full LLM lifecycle — data to weights to serving. Vision systems shipped
+        worldwide for Walmart and Disney. Named inventor on four US patents in
+        computer vision.</p>
+      </div>
+      <div class="member">
+        <h3>Nitin Jindal</h3>
+        <p class="role">Production AI at scale</p>
+        <p>Edge and cloud inference. Face recognition ranked worldwide top-25 on the
+        US NIST FRVT benchmark; AI running on over a million devices at low
+        latency.</p>
+      </div>
+      <div class="member">
+        <h3>Avinash Saxena</h3>
+        <p class="role">Deploys into companies</p>
+        <p>CTO of Zomato through its hyper-growth — today a ~$28B listed company.
+        Founded Roposo, acquired by InMobi's Glance. Founder &amp; CEO of
+        BarRaiser.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <div class="foot-grid">
+      <h2 style="font-size:clamp(24px,3.4vw,34px)">If you run consequential decisions,<br>we'd like to hear from you.</h2>
+      <a class="mail" href="mailto:hello@truna.ai">hello@truna.ai</a>
+    </div>
+    <p class="foot-note">&copy; 2026 Truna · truna.ai · specialist models for business decisions</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var cv=document.getElementById('cover'); if(!cv)return;
+  var ctx=cv.getContext('2d');
+  var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);
+    t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+  var W,H,pts,t0=null,dpr;
+  function layout(){
+    var r=cv.parentElement.getBoundingClientRect();
+    dpr=Math.min(devicePixelRatio||1,2);
+    W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    var rnd=rng(20260919),n=Math.round(Math.min(340,W*0.28));
+    pts=[];
+    // teal: seeds expanding outward in waves across the whole field
+    var seeds=[[0.72,0.30],[0.86,0.62],[0.58,0.75]];
+    for(var i=0;i<n;i++){
+      var s=seeds[i%seeds.length];
+      var ang=rnd()*6.2832, dist=Math.pow(rnd(),0.62);
+      pts.push({x:s[0]*W+Math.cos(ang)*dist*W*0.52,
+                y:s[1]*H+Math.sin(ang)*dist*H*0.78,
+                t:dist, c:'teal', r:1+rnd()*1.7});
+    }
+    // orange: a small cluster that stays near its origin
+    for(var j=0;j<34;j++){
+      var ang2=rnd()*6.2832, d2=Math.pow(rnd(),1.7)*0.09;
+      pts.push({x:(0.70+Math.cos(ang2)*d2)*W, y:(0.28+Math.sin(ang2)*d2*1.6)*H,
+                t:rnd()*0.25, c:'org', r:1.2+rnd()*1.6});
+    }
+  }
+  function draw(p){
+    ctx.clearRect(0,0,W,H);
+    // faint grid
+    ctx.strokeStyle='rgba(236,234,227,0.045)';ctx.lineWidth=1;
+    var g=Math.max(60,W/16);
+    for(var x=g;x<W;x+=g){ctx.beginPath();ctx.moveTo(x+.5,0);ctx.lineTo(x+.5,H);ctx.stroke()}
+    for(var y=g;y<H;y+=g){ctx.beginPath();ctx.moveTo(0,y+.5);ctx.lineTo(W,y+.5);ctx.stroke()}
+    for(var i=0;i<pts.length;i++){
+      var pt=pts[i], vis=(p*1.15-pt.t)/0.18;
+      if(vis<=0)continue; var a=Math.min(1,vis);
+      if(pt.c==='teal'){ctx.fillStyle='rgba(95,168,184,'+(0.55*a)+')'}
+      else{ctx.fillStyle='rgba(224,138,60,'+(0.8*a)+')'}
+      ctx.beginPath();ctx.arc(pt.x,pt.y,pt.r,0,6.2832);ctx.fill();
+    }
+  }
+  function frame(ts){
+    if(t0===null)t0=ts;
+    var e=(ts-t0)/1000, p=Math.min(1,e/7);
+    draw(p);
+    if(p<1)requestAnimationFrame(frame);
+  }
+  function start(){layout();t0=null;if(reduced)draw(1);else requestAnimationFrame(frame)}
+  var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(start,150)});
+  start();
+})();
+</script>
 </body>
 </html>
