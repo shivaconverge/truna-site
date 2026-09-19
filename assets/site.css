@@ -111,7 +111,16 @@ section{padding:clamp(48px,8vh,92px) 0}
 .founders{display:grid;grid-template-columns:repeat(3,1fr);
   gap:22px;max-width:620px}
 @media(max-width:520px){.founders{grid-template-columns:repeat(3,1fr);gap:12px}}
-.founders figure{margin:0}
+.founders figure{margin:0;position:relative;outline:none}
+.f-info{position:absolute;top:0;left:0;right:0;aspect-ratio:1/1;
+  background:rgba(12,17,23,.92);border:1px solid var(--line2);border-radius:14px;
+  opacity:0;transition:opacity .25s ease;padding:14px 15px;
+  display:flex;flex-direction:column;justify-content:center;gap:8px;
+  pointer-events:none;overflow:hidden}
+.f-info p{font-size:12px;line-height:1.5;color:var(--muted);margin:0}
+.f-info .edu{font-family:var(--mono);font-size:10px;letter-spacing:.06em;
+  color:var(--accent)}
+.founders figure:hover .f-info,.founders figure:focus .f-info{opacity:1}
 .founders img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;
   border:1px solid var(--line)}
 .founders figcaption{margin-top:12px;font-family:var(--serif);font-size:18px;
