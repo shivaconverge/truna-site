@@ -135,11 +135,11 @@
       trained across possible worlds, grounded in the real one
     </div>
 
-    <figure class="worldfig" style="margin-top:clamp(40px,6vh,64px)">
-      <img src="assets/manifold.jpg" alt="A glass wave-form surface carrying a branching knowledge tree that gathers into a single glowing peak" loading="lazy">
-      <figcaption>the domain's knowledge, laid over its decision space — gathering
-      into expertise where your company lives</figcaption>
+    <figure class="meetfig">
+      <canvas id="mani" aria-label="A waving wireframe surface whose grid deforms with its curvature, one region rising into a glowing peak"></canvas>
     </figure>
+    <p class="mono-cap" style="margin-top:14px;text-align:center">the domain's decision
+    space — expertise concentrating where your company lives</p>
   </div>
 </section>
 
@@ -456,20 +456,12 @@
     }
   }
   function axis(){
-    var y=H-PAD*0.52;
-    ctx.strokeStyle=css('--line2');ctx.lineWidth=1;
-    ctx.beginPath();ctx.moveTo(PAD*0.5,y+0.5);ctx.lineTo(W-PAD*0.5,y+0.5);ctx.stroke();
-    var n=Math.max(8,Math.round(W/46));
-    for(var i=0;i<=n;i++){
-      var x=PAD*0.5+(W-PAD)*(i/n),tall=(i%4===0);
-      ctx.beginPath();ctx.moveTo(x+.5,y);ctx.lineTo(x+.5,y-(tall?8:4));ctx.stroke();
-    }
+    ctx.save();ctx.setLineDash([2,5]);ctx.strokeStyle='#D9B23F';ctx.globalAlpha=.3;
+    ctx.beginPath();ctx.moveTo(MID+.5,PAD*0.45);ctx.lineTo(MID+.5,H-PAD*0.85);ctx.stroke();ctx.restore();
     ctx.font='500 10px ui-monospace, monospace';ctx.textBaseline='top';
-    ctx.fillStyle=css('--accent');ctx.textAlign='left';ctx.fillText('NOW',PAD*0.5,y+8);
-    ctx.fillStyle=css('--teal');ctx.textAlign='right';ctx.fillText('GOAL',W-PAD*0.5,y+8);
-    ctx.fillStyle='#D9B23F';ctx.textAlign='center';ctx.fillText('MEET',MID,y+8);
-    ctx.save();ctx.setLineDash([2,5]);ctx.strokeStyle='#D9B23F';ctx.globalAlpha=.4;
-    ctx.beginPath();ctx.moveTo(MID+.5,PAD*0.45);ctx.lineTo(MID+.5,y-3);ctx.stroke();ctx.restore();
+    ctx.fillStyle='#D9B23F';ctx.textAlign='center';ctx.globalAlpha=.85;
+    ctx.fillText('M A X I M U M   I N F O R M A T I O N   V A L U E',MID,H-PAD*0.6);
+    ctx.globalAlpha=1;
   }
   function tree(t,side,p){
     var col=side==='F'?css('--accent'):css('--teal');
@@ -524,6 +516,92 @@
     },{threshold:.35});
     io.observe(cv);
   }else{started=true;start();}
+})();
+
+/* the decision-space manifold — animated wireframe with a rising peak */
+(function(){
+  var cv=document.getElementById('mani'); if(!cv)return;
+  var ctx=cv.getContext('2d');
+  var W=0,H=0,t0=null,running=false;
+  var NX=56,NY=26;
+  function layout(){
+    var rect=cv.parentElement.getBoundingClientRect();
+    var dpr=Math.min(devicePixelRatio||1,2);
+    W=Math.max(rect.width,320);H=Math.max(300,Math.min(460,W*0.44));
+    cv.width=W*dpr;cv.height=H*dpr;cv.style.height=H+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  function surf(u,v,t,g,pk){
+    var z=g*(0.16*Math.sin(5.2*u+t*0.5)+0.11*Math.sin(4.1*v-t*0.38+1.7)
+           +0.07*Math.sin(6.8*(u+v*0.7)+t*0.3));
+    var dx=u-0.66,dy=v-0.42,d2=dx*dx*4.2+dy*dy*7.0;
+    var peak=pk*1.9*Math.exp(-d2*16);
+    return {z:z+peak,w:Math.min(1,peak*1.4)};
+  }
+  function P(u,v,z){
+    var x=(u-0.5),y=(v-0.5);
+    var sx=W*0.5+(x*0.92-y*0.34)*W*0.52;
+    var sy=H*0.62+(x*0.22+y*0.78)*H*0.42-z*H*0.30;
+    return [sx,sy];
+  }
+  function draw(e){
+    var g=Math.min(1,e/1.8);g=g*g*(3-2*g);
+    var pk=Math.min(1,Math.max(0,(e-1.1)/2.2));pk=pk*pk*(3-2*pk);
+    ctx.clearRect(0,0,W,H);
+    ctx.lineWidth=1;
+    var i,j,u,v,a,b,pa,pb,w;
+    for(j=0;j<=NY;j++){
+      v=j/NY;
+      for(i=0;i<NX;i++){
+        u=i/NX;
+        a=surf(u,v,e,g,pk);b=surf((i+1)/NX,v,e,g,pk);
+        pa=P(u,v,a.z);pb=P((i+1)/NX,v,b.z);
+        w=(a.w+b.w)/2;
+        ctx.strokeStyle=w>0.04
+          ?'rgba('+Math.round(95+129*w)+','+Math.round(168-30*w)+','+Math.round(184-124*w)+','+(0.20+0.55*w)+')'
+          :'rgba(95,168,184,0.20)';
+        ctx.beginPath();ctx.moveTo(pa[0],pa[1]);ctx.lineTo(pb[0],pb[1]);ctx.stroke();
+      }
+    }
+    for(i=0;i<=NX;i+=2){
+      u=i/NX;
+      for(j=0;j<NY;j++){
+        v=j/NY;
+        a=surf(u,v,e,g,pk);b=surf(u,(j+1)/NY,e,g,pk);
+        pa=P(u,v,a.z);pb=P(u,(j+1)/NY,b.z);
+        w=(a.w+b.w)/2;
+        ctx.strokeStyle=w>0.04
+          ?'rgba('+Math.round(95+129*w)+','+Math.round(168-30*w)+','+Math.round(184-124*w)+','+(0.16+0.5*w)+')'
+          :'rgba(95,168,184,0.16)';
+        ctx.beginPath();ctx.moveTo(pa[0],pa[1]);ctx.lineTo(pb[0],pb[1]);ctx.stroke();
+      }
+    }
+    if(pk>0.5){
+      var tip=surf(0.66,0.42,e,g,pk),pt=P(0.66,0.42,tip.z);
+      var glow=0.25+0.12*Math.sin(e*1.4);
+      var grad=ctx.createRadialGradient(pt[0],pt[1],0,pt[0],pt[1],46);
+      grad.addColorStop(0,'rgba(224,138,60,'+glow*(pk-0.5)*2+')');
+      grad.addColorStop(1,'rgba(224,138,60,0)');
+      ctx.fillStyle=grad;
+      ctx.beginPath();ctx.arc(pt[0],pt[1],46,0,6.2832);ctx.fill();
+    }
+  }
+  function frame(ts){
+    if(t0===null)t0=ts;
+    var e=(ts-t0)/1000;
+    draw(e);
+    if(e<60){requestAnimationFrame(frame);}else{running=false;}
+  }
+  function start(){layout();t0=null;
+    if(!running){running=true;requestAnimationFrame(frame);}}
+  var rt3;addEventListener('resize',function(){clearTimeout(rt3);rt3=setTimeout(function(){running=false;start()},160)});
+  if('IntersectionObserver' in window){
+    layout();draw(1e4+0.5);
+    var io=new IntersectionObserver(function(en){
+      if(en[0].isIntersecting&&!running){start();}
+    },{threshold:.3});
+    io.observe(cv);
+  }else{start();}
 })();
 </script>
 </body>
