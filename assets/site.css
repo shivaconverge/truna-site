@@ -13,11 +13,7 @@
 html{scroll-behavior:smooth}
 body{background:var(--ground);color:var(--ink);font-family:var(--sans);
   font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-  background-image:
-    linear-gradient(rgba(236,234,227,.030) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(236,234,227,.030) 1px,transparent 1px);
-  background-size:84px 84px}
+  overflow-x:hidden}
 img,video{max-width:100%;display:block}
 a{color:inherit}
 ::selection{background:rgba(224,138,60,.28)}
