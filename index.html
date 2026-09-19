@@ -518,12 +518,14 @@
   }else{started=true;start();}
 })();
 
-/* the decision-space manifold — animated wireframe with a rising peak */
+/* the decision-space manifold — a knowledge tree on a translucent sheet */
 (function(){
   var cv=document.getElementById('mani'); if(!cv)return;
   var ctx=cv.getContext('2d');
   var W=0,H=0,t0=null,running=false;
-  var NX=56,NY=26;
+  var PX=0.68,PY=0.42; // peak location in uv
+  function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);
+    t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
   function layout(){
     var rect=cv.parentElement.getBoundingClientRect();
     var dpr=Math.min(devicePixelRatio||1,2);
@@ -532,9 +534,9 @@
     ctx.setTransform(dpr,0,0,dpr,0,0);
   }
   function surf(u,v,t,g,pk){
-    var z=g*(0.16*Math.sin(5.2*u+t*0.5)+0.11*Math.sin(4.1*v-t*0.38+1.7)
-           +0.07*Math.sin(6.8*(u+v*0.7)+t*0.3));
-    var dx=u-0.66,dy=v-0.42,d2=dx*dx*4.2+dy*dy*7.0;
+    var z=g*(0.14*Math.sin(5.2*u+t*0.5)+0.10*Math.sin(4.1*v-t*0.38+1.7)
+           +0.06*Math.sin(6.8*(u+v*0.7)+t*0.3));
+    var dx=u-PX,dy=v-PY,d2=dx*dx*4.2+dy*dy*7.0;
     var peak=pk*1.9*Math.exp(-d2*16);
     return {z:z+peak,w:Math.min(1,peak*1.4)};
   }
@@ -544,40 +546,87 @@
     var sy=H*0.62+(x*0.22+y*0.78)*H*0.42-z*H*0.30;
     return [sx,sy];
   }
+  // the tree, grown once in uv space; lifted onto the surface every frame
+  var segs=[],maxT=1;
+  function buildTree(){
+    segs=[];var rnd=rng(20260919);
+    function grow(u,v,ang,depth,t){
+      if(depth>7)return;
+      var kids=depth<1?3:2;
+      for(var k=0;k<kids;k++){
+        var L=(0.17+rnd()*0.06)*Math.pow(0.82,depth);
+        var spread=(kids===3?(k-1)*(0.7+rnd()*0.3):(k===0?-1:1)*(0.45+rnd()*0.5)*(1.3/(depth*0.4+1)));
+        var na=ang+spread;
+        var toPeak=Math.atan2((PY-v)*1.4,PX-u);
+        var bias=Math.max(0,Math.min(0.5,(u-0.38)*1.0));
+        na=na*(1-bias)+toPeak*bias;
+        var nu=Math.max(0.04,Math.min(0.96,u+Math.cos(na)*L));
+        var nv=Math.max(0.07,Math.min(0.93,v+Math.sin(na)*L*1.5));
+        var nt=t+L;
+        segs.push({au:u,av:v,bu:nu,bv:nv,d:depth,t0:t,t1:nt});
+        grow(nu,nv,na,depth+1,nt);
+      }
+    }
+    grow(0.06,0.5,0,0,0);
+    maxT=0;for(var i=0;i<segs.length;i++)if(segs[i].t1>maxT)maxT=segs[i].t1;
+  }
+  function sheet(e,g,pk){
+    // translucent glass: soft fill + luminous rim, no grid
+    var i,u,v,s,p;
+    ctx.beginPath();
+    for(i=0;i<=40;i++){u=i/40;s=surf(u,0,e,g,pk);p=P(u,0,s.z);i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]);}
+    for(i=0;i<=40;i++){v=i/40;s=surf(1,v,e,g,pk);p=P(1,v,s.z);ctx.lineTo(p[0],p[1]);}
+    for(i=40;i>=0;i--){u=i/40;s=surf(u,1,e,g,pk);p=P(u,1,s.z);ctx.lineTo(p[0],p[1]);}
+    for(i=40;i>=0;i--){v=i/40;s=surf(0,v,e,g,pk);p=P(0,v,s.z);ctx.lineTo(p[0],p[1]);}
+    ctx.closePath();
+    ctx.fillStyle='rgba(95,168,184,0.055)';ctx.fill();
+    ctx.strokeStyle='rgba(180,220,228,0.30)';ctx.lineWidth=1.1;ctx.stroke();
+    // faint inner contour lines to suggest the glass, following curvature
+    ctx.lineWidth=0.7;
+    for(var j=1;j<5;j++){
+      v=j/5;ctx.beginPath();
+      for(i=0;i<=48;i++){u=i/48;s=surf(u,v,e,g,pk);p=P(u,v,s.z);i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]);}
+      ctx.strokeStyle='rgba(95,168,184,0.07)';ctx.stroke();
+    }
+  }
+  function tree(e,g,pk,tp){
+    var i,k,seg,w,mu,mv;
+    for(i=0;i<segs.length;i++){
+      seg=segs[i];
+      var reach=(tp*maxT-seg.t0)/(seg.t1-seg.t0);
+      if(reach<=0)continue;
+      var kk=Math.min(1,reach);
+      // sample the segment on the surface so it bends with the sheet
+      ctx.beginPath();
+      var steps=5;
+      for(k=0;k<=steps;k++){
+        var f=(k/steps)*kk;
+        var u=seg.au+(seg.bu-seg.au)*f, v=seg.av+(seg.bv-seg.av)*f;
+        var s=surf(u,v,e,g,pk), p=P(u,v,s.z);
+        k?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]);
+      }
+      mu=(seg.au+seg.bu)/2;mv=(seg.av+seg.bv)/2;
+      w=surf(mu,mv,e,g,pk).w;
+      ctx.strokeStyle='rgba('+Math.round(120+104*w)+','+Math.round(180-42*w)+','+Math.round(190-130*w)+','+(0.28+0.5*w+0.12*(1-seg.d/9))+')';
+      ctx.lineWidth=Math.max(0.7,2.2-seg.d*0.22);
+      ctx.lineCap='round';
+      ctx.stroke();
+      if(kk>=1&&seg.d>=1){
+        var se=surf(seg.bu,seg.bv,e,g,pk),pe=P(seg.bu,seg.bv,se.z);
+        ctx.fillStyle='rgba('+Math.round(120+104*se.w)+','+Math.round(180-42*se.w)+','+Math.round(190-130*se.w)+','+(0.5+0.4*se.w)+')';
+        ctx.beginPath();ctx.arc(pe[0],pe[1],Math.max(0.9,2.2-seg.d*0.18),0,6.2832);ctx.fill();
+      }
+    }
+  }
   function draw(e){
     var g=Math.min(1,e/1.8);g=g*g*(3-2*g);
-    var pk=Math.min(1,Math.max(0,(e-1.1)/2.2));pk=pk*pk*(3-2*pk);
+    var pk=Math.min(1,Math.max(0,(e-1.0)/2.4));pk=pk*pk*(3-2*pk);
+    var tp=Math.min(1,Math.max(0,(e-0.6)/3.4));tp=tp*tp*(3-2*tp);
     ctx.clearRect(0,0,W,H);
-    ctx.lineWidth=1;
-    var i,j,u,v,a,b,pa,pb,w;
-    for(j=0;j<=NY;j++){
-      v=j/NY;
-      for(i=0;i<NX;i++){
-        u=i/NX;
-        a=surf(u,v,e,g,pk);b=surf((i+1)/NX,v,e,g,pk);
-        pa=P(u,v,a.z);pb=P((i+1)/NX,v,b.z);
-        w=(a.w+b.w)/2;
-        ctx.strokeStyle=w>0.04
-          ?'rgba('+Math.round(95+129*w)+','+Math.round(168-30*w)+','+Math.round(184-124*w)+','+(0.20+0.55*w)+')'
-          :'rgba(95,168,184,0.20)';
-        ctx.beginPath();ctx.moveTo(pa[0],pa[1]);ctx.lineTo(pb[0],pb[1]);ctx.stroke();
-      }
-    }
-    for(i=0;i<=NX;i+=2){
-      u=i/NX;
-      for(j=0;j<NY;j++){
-        v=j/NY;
-        a=surf(u,v,e,g,pk);b=surf(u,(j+1)/NY,e,g,pk);
-        pa=P(u,v,a.z);pb=P(u,(j+1)/NY,b.z);
-        w=(a.w+b.w)/2;
-        ctx.strokeStyle=w>0.04
-          ?'rgba('+Math.round(95+129*w)+','+Math.round(168-30*w)+','+Math.round(184-124*w)+','+(0.16+0.5*w)+')'
-          :'rgba(95,168,184,0.16)';
-        ctx.beginPath();ctx.moveTo(pa[0],pa[1]);ctx.lineTo(pb[0],pb[1]);ctx.stroke();
-      }
-    }
+    sheet(e,g,pk);
+    tree(e,g,pk,tp);
     if(pk>0.5){
-      var tip=surf(0.66,0.42,e,g,pk),pt=P(0.66,0.42,tip.z);
+      var tip=surf(PX,PY,e,g,pk),pt=P(PX,PY,tip.z);
       var glow=0.25+0.12*Math.sin(e*1.4);
       var grad=ctx.createRadialGradient(pt[0],pt[1],0,pt[0],pt[1],46);
       grad.addColorStop(0,'rgba(224,138,60,'+glow*(pk-0.5)*2+')');
@@ -592,11 +641,11 @@
     draw(e);
     if(e<60){requestAnimationFrame(frame);}else{running=false;}
   }
-  function start(){layout();t0=null;
+  function start(){if(!segs.length)buildTree();layout();t0=null;
     if(!running){running=true;requestAnimationFrame(frame);}}
   var rt3;addEventListener('resize',function(){clearTimeout(rt3);rt3=setTimeout(function(){running=false;start()},160)});
   if('IntersectionObserver' in window){
-    layout();draw(1e4+0.5);
+    buildTree();layout();draw(1e4+0.5);
     var io=new IntersectionObserver(function(en){
       if(en[0].isIntersecting&&!running){start();}
     },{threshold:.3});
