@@ -128,6 +128,17 @@ body>section:nth-of-type(odd){
   border:1px solid var(--line)}
 .founders figcaption{margin-top:12px;font-family:var(--serif);font-size:18px;
   color:var(--ink)}
+.founders figure.sel img{border-color:var(--accent)}
+.f-detail{display:none;margin-top:18px;max-width:620px;padding:14px 16px;
+  border:1px solid var(--line2);border-left:3px solid var(--accent);
+  border-radius:10px;background:var(--panel)}
+.f-detail.on{display:block}
+.f-detail .who{font-family:var(--serif);font-size:17px;color:var(--ink);margin:0 0 6px}
+.f-detail p{font-size:13px;line-height:1.55;color:var(--muted);margin:0 0 8px}
+.f-detail p:last-child{margin-bottom:0}
+.f-detail .edu{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;
+  color:var(--accent)}
+@media(hover:hover) and (min-width:761px){.f-detail{display:none!important}}
 
 /* world figures */
 .worldfig{margin:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;

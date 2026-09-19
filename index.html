@@ -343,6 +343,7 @@
         <figcaption>Avinash Saxena</figcaption>
       </figure>
     </div>
+    <div class="f-detail" id="f-detail"></div>
   </div>
 </section>
 
@@ -711,6 +712,24 @@
     },{threshold:0});
     io.observe(cv);
   }else{buildTree();layout();start();}
+})();
+
+/* founder tap-to-reveal on touch/narrow screens */
+(function(){
+  var det=document.getElementById('f-detail'); if(!det)return;
+  var figs=[].slice.call(document.querySelectorAll('.founders figure'));
+  var cur=-1;
+  figs.forEach(function(f,i){
+    f.addEventListener('click',function(){
+      if(!matchMedia('(hover: none), (max-width: 760px)').matches)return;
+      if(cur===i){det.className='f-detail';f.classList.remove('sel');cur=-1;return;}
+      figs.forEach(function(g){g.classList.remove('sel')});
+      f.classList.add('sel');cur=i;
+      var info=f.querySelector('.f-info'),name=f.querySelector('figcaption');
+      det.innerHTML='<p class="who">'+name.textContent+'</p>'+info.innerHTML;
+      det.className='f-detail on';
+    });
+  });
 })();
 </script>
 </body>
