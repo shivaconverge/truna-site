@@ -581,12 +581,47 @@
     ctx.closePath();
     ctx.fillStyle='rgba(95,168,184,0.055)';ctx.fill();
     ctx.strokeStyle='rgba(180,220,228,0.30)';ctx.lineWidth=1.1;ctx.stroke();
-    // faint inner contour lines to suggest the glass, following curvature
+    // contour lines that follow the curvature — faint on the flat, bright on the peak
     ctx.lineWidth=0.7;
-    for(var j=1;j<5;j++){
-      v=j/5;ctx.beginPath();
-      for(i=0;i<=48;i++){u=i/48;s=surf(u,v,e,g,pk);p=P(u,v,s.z);i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]);}
-      ctx.strokeStyle='rgba(95,168,184,0.07)';ctx.stroke();
+    var j,w,s2,p2;
+    for(j=1;j<12;j++){
+      v=j/12;
+      for(i=0;i<48;i++){
+        u=i/48;
+        s=surf(u,v,e,g,pk);s2=surf((i+1)/48,v,e,g,pk);
+        p=P(u,v,s.z);p2=P((i+1)/48,v,s2.z);
+        w=(s.w+s2.w)/2;
+        ctx.strokeStyle='rgba('+Math.round(95+129*w)+','+Math.round(168-30*w)+','+Math.round(184-124*w)+','+(0.055+0.45*w)+')';
+        ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(p2[0],p2[1]);ctx.stroke();
+      }
+    }
+    for(j=1;j<16;j++){
+      u=j/16;
+      for(i=0;i<32;i++){
+        v=i/32;
+        s=surf(u,v,e,g,pk);s2=surf(u,(i+1)/32,e,g,pk);
+        w=(s.w+s2.w)/2;
+        if(w<0.03)continue;
+        p=P(u,v,s.z);p2=P(u,(i+1)/32,s2.z);
+        ctx.strokeStyle='rgba('+Math.round(95+129*w)+','+Math.round(168-30*w)+','+Math.round(184-124*w)+','+(0.4*w)+')';
+        ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(p2[0],p2[1]);ctx.stroke();
+      }
+    }
+    // the glass membrane of the peak itself — translucent fill, back to front
+    var NU=16,NV=12,u0=0.46,u1=0.90,v0=0.16,v1=0.68,ii,jj;
+    for(jj=0;jj<NV;jj++){
+      for(ii=NU-1;ii>=0;ii--){
+        var ua=u0+(u1-u0)*ii/NU, ub=u0+(u1-u0)*(ii+1)/NU;
+        var va=v0+(v1-v0)*jj/NV, vb=v0+(v1-v0)*(jj+1)/NV;
+        var c00=surf(ua,va,e,g,pk),c10=surf(ub,va,e,g,pk),
+            c11=surf(ub,vb,e,g,pk),c01=surf(ua,vb,e,g,pk);
+        w=(c00.w+c10.w+c11.w+c01.w)/4;
+        if(w<0.02)continue;
+        var q0=P(ua,va,c00.z),q1=P(ub,va,c10.z),q2=P(ub,vb,c11.z),q3=P(ua,vb,c01.z);
+        ctx.fillStyle='rgba('+Math.round(105+119*w)+','+Math.round(172-34*w)+','+Math.round(186-126*w)+','+(0.05+0.16*w)+')';
+        ctx.beginPath();ctx.moveTo(q0[0],q0[1]);ctx.lineTo(q1[0],q1[1]);
+        ctx.lineTo(q2[0],q2[1]);ctx.lineTo(q3[0],q3[1]);ctx.closePath();ctx.fill();
+      }
     }
   }
   function tree(e,g,pk,tp){
