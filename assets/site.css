@@ -108,12 +108,13 @@ section{padding:clamp(48px,8vh,92px) 0}
 .formula .a{color:var(--accent)}
 
 /* team */
-.founders{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:26px;max-width:820px}
+.founders{display:grid;grid-template-columns:repeat(3,1fr);
+  gap:22px;max-width:620px}
+@media(max-width:520px){.founders{grid-template-columns:repeat(3,1fr);gap:12px}}
 .founders figure{margin:0}
-.founders img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:14px;
+.founders img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;
   border:1px solid var(--line)}
-.founders figcaption{margin-top:14px;font-family:var(--serif);font-size:20px;
+.founders figcaption{margin-top:12px;font-family:var(--serif);font-size:18px;
   color:var(--ink)}
 
 /* world figures */
