@@ -28,7 +28,7 @@
 .btn.primary{background:var(--accent);border-color:var(--accent);color:#14100A}
 .btn.primary:hover{background:#EA9A50}
 .btn:hover{border-color:var(--accent)}
-#cover{position:absolute;inset:0;z-index:1;opacity:.5}
+#cover{position:absolute;inset:0;z-index:1;opacity:.85}
 .hero-cap{position:relative;z-index:2;margin-top:clamp(48px,9vh,90px);
   display:flex;flex-wrap:wrap;gap:8px 26px;font-family:var(--mono);font-size:11.5px;
   letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
@@ -375,7 +375,7 @@
     dpr=Math.min(devicePixelRatio||1,2);
     W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;
     ctx.setTransform(dpr,0,0,dpr,0,0);
-    var rnd=rng(20260919),n=Math.round(Math.min(340,W*0.28));
+    var rnd=rng(20260919),n=Math.round(Math.min(340,Math.max(160,W*0.28)));
     pts=[];
     // teal: seeds expanding outward in waves across the whole field
     var seeds=[[0.72,0.30],[0.86,0.62],[0.58,0.75]];
@@ -392,30 +392,41 @@
       pts.push({x:(0.70+Math.cos(ang2)*d2)*W, y:(0.28+Math.sin(ang2)*d2*1.6)*H,
                 t:rnd()*0.25, c:'org', r:1.2+rnd()*1.6});
     }
-    // each dot gets its own moment of appearance, and its own twinkle phase
+    // each dot gets its own moment of appearance, twinkle phase, re-ignition cycle
     for(var m=0;m<pts.length;m++){
-      pts[m].appear=pts[m].t*9+rnd()*2.2;
+      pts[m].appear=pts[m].t*5.5+rnd()*1.6;
       pts[m].phase=rnd()*6.2832;
       pts[m].tw=0.5+rnd()*0.7;
+      pts[m].period=9+rnd()*22;
     }
   }
   function ease(u){return u<=0?0:u>=1?1:u*u*(3-2*u)}
   function draw(e){
     ctx.clearRect(0,0,W,H);
     for(var i=0;i<pts.length;i++){
-      var pt=pts[i], a=ease((e-pt.appear)/2.4);
-      if(a<=0)continue;
-      var tw=a>=1?(0.82+0.18*Math.sin(e*pt.tw+pt.phase)):1;
-      if(pt.c==='teal'){ctx.fillStyle='rgba(95,168,184,'+(0.55*a*tw)+')'}
-      else{ctx.fillStyle='rgba(224,138,60,'+(0.8*a*tw)+')'}
-      ctx.beginPath();ctx.arc(pt.x,pt.y,pt.r*(0.5+0.5*a),0,6.2832);ctx.fill();
+      var pt=pts[i], ts=e-pt.appear;
+      if(ts<=0)continue;
+      var cyc=ts%pt.period;                     // time since this dot last ignited
+      var f=Math.exp(-1.9*cyc);                 // the flash: bright birth, slow fade
+      var a=ease(ts/1.2); if(a>1)a=1;
+      var tw=0.8+0.2*Math.sin(e*pt.tw+pt.phase);
+      var rest=(pt.c==='teal'?0.42:0.6)*tw*a;
+      var alpha=Math.min(1,rest+f*0.95);
+      var rad=pt.r*(0.6+0.4*a)*(1+1.2*f);
+      if(f>0.25){                               // soft halo while newly lit
+        ctx.fillStyle=(pt.c==='teal'?'rgba(150,220,235,':'rgba(240,170,95,')+(0.22*f)+')';
+        ctx.beginPath();ctx.arc(pt.x,pt.y,rad*3.2,0,6.2832);ctx.fill();
+      }
+      if(pt.c==='teal'){ctx.fillStyle='rgba('+Math.round(95+90*f)+','+Math.round(168+50*f)+','+Math.round(184+45*f)+','+alpha+')'}
+      else{ctx.fillStyle='rgba('+Math.round(224+28*f)+','+Math.round(138+50*f)+','+Math.round(60+60*f)+','+alpha+')'}
+      ctx.beginPath();ctx.arc(pt.x,pt.y,rad,0,6.2832);ctx.fill();
     }
   }
   function frame(ts){
     if(t0===null)t0=ts;
     var e=(ts-t0)/1000;
     draw(e);
-    if(e<150)requestAnimationFrame(frame);
+    if(e<600)requestAnimationFrame(frame);
   }
   function start(){layout();t0=null;if(reduced)draw(1e9);else requestAnimationFrame(frame)}
   var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(start,150)});
