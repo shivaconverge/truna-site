@@ -49,11 +49,20 @@
   a complete proof, a separate model reviews it, and only a verified improvement
   becomes the next seed. Model weights never change.</p>
 
+  <figure class="fig">
+    <img src="../assets/r3si-figure.png" alt="The R³SI pipeline: seed acquisition; reciprocal reasoning, where forward search from the seed proof and backward search from the target meet at closed subgoals; and proof refinement, where a prover and a separate verifier turn retained lemmas and feedback into an improved proof that becomes the next seed" loading="lazy" style="background:#fff">
+    <figcaption>The loop: forward from the proof, backward from the target,
+    reviewed lemmas between them — and only a verified stronger proof becomes the
+    next seed.</figcaption>
+  </figure>
+
   <h2>Result</h2>
   <p>Four accepted improvements took a seeded guarantee from <b>3.740 to
-  3.155</b> — about <b>10% stronger than a recently published agentic result
-  (3.520)</b> and about 70% of the way to the best published mathematical
-  guarantee of 3. A proof-only control from the same seed reached 3.354.</p>
+  3.155</b> — about <b>10% stronger than the 3.520 published by Google
+  Research's Cogentic</b>, a multi-agent proof system built on Gemini — and
+  about 70% of the way to the best published mathematical guarantee of 3. A
+  proof-only control from the same seed reached 3.354. Cogentic's result was
+  verified by human experts; ours, so far, by a separate model.</p>
 
   <figure class="fig">
     <svg viewBox="0 0 640 330" role="img" aria-label="Approximation factor across an initial proof and four accepted improvements: reciprocal refinement falls from 3.740 to 3.155, proof-only refinement from 3.740 to 3.354; reference lines at 3.520 for the published agentic result and 3.0 for the published mathematical guarantee" style="display:block;width:100%;height:auto;background:var(--panel)">
@@ -63,7 +72,7 @@
         <text x="52" y="284">3.0</text><text x="52" y="220">3.2</text><text x="52" y="156">3.4</text><text x="52" y="92">3.6</text><text x="52" y="28">3.8</text>
       </g>
       <line x1="60" y1="113.6" x2="610" y2="113.6" stroke="#7E93AC" stroke-dasharray="6 5" opacity=".8"/>
-      <text x="606" y="106" text-anchor="end" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#7E93AC">published agentic result · 3.520</text>
+      <text x="606" y="106" text-anchor="end" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#7E93AC">Google Research · Cogentic · 3.520</text>
       <line x1="60" y1="280" x2="610" y2="280" stroke="#9AA2AB" stroke-dasharray="2 4"/>
       <text x="606" y="272" text-anchor="end" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#9AA2AB">published mathematical guarantee · 3.000</text>
       <path d="M90 43.2 L210 97.6 L330 113.6 L450 155.5 L570 166.7" fill="none" stroke="#7E93AC" stroke-width="1.8" stroke-dasharray="6 5"/>
@@ -97,8 +106,9 @@
       <ul>
         <li>An agentic loop accumulated four verified improvements on one proof,
         with no weight updates.</li>
-        <li>The final guarantee beats a recently published agentic result and far
-        exceeds direct prompting (4.829).</li>
+        <li>The final guarantee beats Google Research's recently published
+        agentic result (Cogentic, 3.520) and far exceeds direct prompting
+        (4.829).</li>
         <li>Every step is auditable: complete proof, reviewed dependencies, exact
         rational certificates.</li>
       </ul>
@@ -111,7 +121,8 @@
         model.</li>
         <li>A matched-compute advantage over the control, or results across many
         tasks.</li>
-        <li>Formal verification — reviews are by a separate model.</li>
+        <li>Expert or formal verification — reviews are by a separate model,
+        where Cogentic's proofs were checked by human experts.</li>
       </ul>
     </div>
   </div>
