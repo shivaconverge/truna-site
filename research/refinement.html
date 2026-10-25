@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<title>Compounding refinement — Truna Research</title>
+<meta name="description" content="R³SI: forward and backward reasoning exchange reviewed evidence, and each verified improvement seeds the next cycle. Four accepted improvements take a proof guarantee from 3.740 to 3.155.">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="/">
+      <svg width="26" height="26" viewBox="0 0 30 30"><circle cx="15" cy="15" r="12.5" fill="none" stroke="currentColor" opacity=".55" stroke-width="1.3" stroke-dasharray="3 3.5"/><circle cx="18.5" cy="17.5" r="5" fill="#E08A3C"/></svg>
+      <span>Truna</span>
+    </a>
+    <div class="nav-links">
+      <a class="hide-xs" href="/#method">Method</a>
+      <a href="./" aria-current="page">Research</a>
+      <a href="/#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="article">
+  <a class="backlink" href="./">← Research</a>
+  <h1>Compounding refinement</h1>
+  <p class="lede">An expert works in both directions: forward from what is known,
+  backward from what is needed. R³SI makes those two directions exchange
+  evidence — and reuses every verified improvement as the next starting point.
+  The question: does the work <b>compound</b>?</p>
+  <div class="meta">
+    <span class="tag measured">measured</span>
+    <span class="tag">one task</span>
+    <span class="tag">model-reviewed</span>
+  </div>
+</header>
+
+<div class="prose">
+  <h2>Setup</h2>
+  <p>The test bed is a problem where results can be checked: a revenue guarantee
+  in mechanism design — how close simple selling strategies come to the best
+  possible mechanism for one buyer of many items, expressed as a coefficient
+  where <b>lower is stronger</b>. Forward reasoning derives consequences of the
+  current proof; backward reasoning proposes what would have to be true for a
+  stronger one. Reviewed lemmas close subgoals between them; a prover then writes
+  a complete proof, a separate model reviews it, and only a verified improvement
+  becomes the next seed. Model weights never change.</p>
+
+  <h2>Result</h2>
+  <p>Four accepted improvements took a seeded guarantee from <b>3.740 to
+  3.155</b> — about <b>10% stronger than a recently published agentic result
+  (3.520)</b> and about 70% of the way to the best published mathematical
+  guarantee of 3. A proof-only control from the same seed reached 3.354.</p>
+
+  <figure class="fig">
+    <svg viewBox="0 0 640 330" role="img" aria-label="Approximation factor across an initial proof and four accepted improvements: reciprocal refinement falls from 3.740 to 3.155, proof-only refinement from 3.740 to 3.354; reference lines at 3.520 for the published agentic result and 3.0 for the published mathematical guarantee" style="display:block;width:100%;height:auto;background:var(--panel)">
+      <line x1="60" y1="280" x2="610" y2="280" stroke="#2C3641"/>
+      <line x1="60" y1="280" x2="60" y2="24" stroke="#2C3641"/>
+      <g font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5E6871" text-anchor="end">
+        <text x="52" y="284">3.0</text><text x="52" y="220">3.2</text><text x="52" y="156">3.4</text><text x="52" y="92">3.6</text><text x="52" y="28">3.8</text>
+      </g>
+      <line x1="60" y1="113.6" x2="610" y2="113.6" stroke="#7E93AC" stroke-dasharray="6 5" opacity=".8"/>
+      <text x="606" y="106" text-anchor="end" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#7E93AC">published agentic result · 3.520</text>
+      <line x1="60" y1="280" x2="610" y2="280" stroke="#9AA2AB" stroke-dasharray="2 4"/>
+      <text x="606" y="272" text-anchor="end" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#9AA2AB">published mathematical guarantee · 3.000</text>
+      <path d="M90 43.2 L210 97.6 L330 113.6 L450 155.5 L570 166.7" fill="none" stroke="#7E93AC" stroke-width="1.8" stroke-dasharray="6 5"/>
+      <path d="M90 43.2 L210 109.4 L330 191.7 L450 227.2 L570 230.4" fill="none" stroke="#E08A3C" stroke-width="2.6"/>
+      <g fill="#E08A3C"><circle cx="90" cy="43.2" r="4.5"/><circle cx="210" cy="109.4" r="4"/><circle cx="330" cy="191.7" r="4"/><circle cx="450" cy="227.2" r="4"/><circle cx="570" cy="230.4" r="5"/></g>
+      <g fill="#7E93AC"><circle cx="210" cy="97.6" r="3.5"/><circle cx="330" cy="113.6" r="3.5"/><circle cx="450" cy="155.5" r="3.5"/><circle cx="570" cy="166.7" r="3.5"/></g>
+      <text x="100" y="39" font-family="ui-monospace,Menlo,monospace" font-size="10.5" fill="#9AA2AB">3.740 shared seed</text>
+      <text x="578" y="235" font-family="ui-monospace,Menlo,monospace" font-size="12" font-weight="600" fill="#E08A3C">3.155</text>
+      <text x="578" y="171" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#7E93AC">3.354</text>
+      <g font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5E6871" text-anchor="middle">
+        <text x="90" y="298">initial</text><text x="210" y="298">1</text><text x="330" y="298">2</text><text x="450" y="298">3</text><text x="570" y="298">4</text>
+      </g>
+      <text x="333" y="322" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5E6871">accepted improvement → · solid = reciprocal · dashed = proof-only</text>
+    </svg>
+    <figcaption>Accepted improvements only · the reciprocal condition used more
+    compute per cycle than the proof-only control · gains narrow from 0.21 to
+    0.01 per step.</figcaption>
+  </figure>
+
+  <h2>Why it matters</h2>
+  <p>Generating ideas is easy; accumulating them is not. Here partial results,
+  failed routes and reviewed lemmas became a research state that the next cycle
+  started from — and the guarantee improved four times in a row. Mathematics is
+  the laboratory because a proof can be checked; the mechanism — reason forward
+  from the world, backward from the decision, keep only what survives review —
+  is the one our specialists are being built around.</p>
+
+  <div class="claims">
+    <div class="yes">
+      <h3>This establishes</h3>
+      <ul>
+        <li>An agentic loop accumulated four verified improvements on one proof,
+        with no weight updates.</li>
+        <li>The final guarantee beats a recently published agentic result and far
+        exceeds direct prompting (4.829).</li>
+        <li>Every step is auditable: complete proof, reviewed dependencies, exact
+        rational certificates.</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h3>Not yet shown</h3>
+      <ul>
+        <li>New mathematics — the published factor-3 result is stronger.</li>
+        <li>That the system itself improves; the gains are in the work, not the
+        model.</li>
+        <li>A matched-compute advantage over the control, or results across many
+        tasks.</li>
+        <li>Formal verification — reviews are by a separate model.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="mono-cap" style="margin-top:28px">full technical report — method, proof,
+  certificates, provenance — available on request ·
+  <a href="mailto:hello@truna.ai" style="color:var(--accent)">hello@truna.ai</a></p>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <a class="backlink" href="./">← All research</a>
+      <a class="mail" href="mailto:hello@truna.ai" style="margin-left:auto">hello@truna.ai</a>
+    </div>
+    <p class="foot-note">&copy; 2026 Truna · truna.ai</p>
+  </div>
+</footer>
+
+</body>
+</html>
